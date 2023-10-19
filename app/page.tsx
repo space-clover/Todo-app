@@ -54,9 +54,9 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="container mx-auto mt-5">
-      <h1 className="text-2xl font-semibold mb-3">Lista de Tareas</h1>
-      <div className="flex space-x-2 mb-4">
+    <div className="container mx-auto  bg-beige-perlado h-screen w-full p-5">
+      <h1 className="text-7xl font-semibold mb-3 text-negro-medianoche">Lista de Tareas</h1>
+      <div className="flex space-x-2 mb-4 hidden">
         <input
           type="text"
           className="w-full p-2"

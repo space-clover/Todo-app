@@ -1,9 +1,19 @@
 {
   "tasks": [
     {
-      "text": "nuevo tareanueva tarea",
-      "completed": false,
+      "text": "Ir de compras",
+      "completed": true,
       "id": 2
+    },
+    {
+      "text": "Pasear a mis perros durante tres horas exactas",
+      "completed": false,
+      "id": 3
+    },
+    {
+      "text": "Ir de compras",
+      "completed": true,
+      "id": 4
     }
   ]
 }
