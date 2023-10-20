@@ -1,11 +1,12 @@
 "use client"
 import { useState } from 'react';
 import { TaskType } from "./Types/TaskType";
+import { AiFillEdit, AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 interface TaskProps {
     task: TaskType;
     onToggle: () => void;
     onDelete: () => void;
-    onUpdate: (text: string) => void; // Nueva función para actualizar
+    onUpdate: (text: string) => void; 
   }
   
   const Task: React.FC<TaskProps> = ({ task, onToggle, onDelete, onUpdate, }) => {
@@ -18,8 +19,8 @@ interface TaskProps {
     };
   
     return (
-      <div className="flex items-center p-0.5  w-40% bg-negro-medianoche text-beige-perlado mt-1% ">
-        <div className='border-beige-perlado flex ites-center justify-around text-xl  border-2 w-full py-4 px-3'>
+      <div className="flex items-center p-0.5  w-full bg-negro-medianoche text-beige-perlado mt-1% ">
+        <div className='border-beige-perlado flex items-center justify-around text-xl  border-2 w-full py-4 px-3'>
           <input
             type="checkbox"
             checked={task.completed}
@@ -28,28 +29,28 @@ interface TaskProps {
           />
           {isEditing ? (
             <input
-            className='w-50% bg-negro-medianoche text-beige-perlado h-auto resize-none'
+            className='flex-1 bg-negro-medianoche ml-2 text-beige-perlado h-auto resize-none'
             type="text"
             value={editedText}
             onChange={(e) => setEditedText(e.target.value)}
             />
           ) : (
-            <span className={`flex-1  text-center ml-2 ${task.completed ? 'line-through' : ''}`}>
+            <span className={`flex-1  text-left ml-2 ${task.completed ? 'line-through' : ''}`}>
               {task.text}
             </span>
           )}
-          <div className='flex items-center justify-around w-40%'>
+          <div className='flex items-center justify-around w-20%'>
             {isEditing ? (
-              <button onClick={handleUpdate} className="text-green-500 flex items-center">
-                Actualizar
+              <button onClick={handleUpdate} className="text-green-500 text-2xl flex mr-2 items-center">
+                <AiOutlineCheck/>
               </button>
             ) : (
-              <button onClick={() => setEditing(true)} className="text-azul-crepusculo mr-2">
-                Editar
+              <button onClick={() => setEditing(true)} className="text-azul-crepusculo text-2xl mr-2">
+                <AiOutlineEdit/>
               </button>
             )}
-            <button onClick={onDelete} className="text-red-700">
-              Eliminar
+            <button onClick={onDelete} className="text-red-800 text-2xl">
+              <AiOutlineDelete/>
             </button>
           </div>
         </div>
