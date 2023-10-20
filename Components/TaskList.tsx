@@ -1,23 +1,30 @@
 "use client"
 import { TaskType } from './Types/TaskType';
+import { NoteType } from './Types/NoteType';
 import React, { useState, useEffect } from 'react';
 import Task from './Task';
 import axios from 'axios';
+import Note from './Note';
 import { AiOutlinePlus, AiOutlinePlusCircle } from 'react-icons/ai';
 
 interface TaskListProps {
     tasks: TaskType[];
+    notes: NoteType[]; // Agrega un arreglo de notas
     onToggle: (id: number) => void;
     onDelete: (id: number) => void;
+    onDeletenote: (id: number) => void;
     onUpdate: (id: number, newText: string) => void;
+    onUpdatenote: (id: number, newText: string) => void;
     onStateChange: (newState: boolean) => void;
+    onStateChangenote: (newState: boolean) => void;
 }
 
 const apiUrl = 'http://worldtimeapi.org/api/ip';
 
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, onToggle, onDelete, onUpdate, onStateChange }) => {
+const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdatenote ,onToggle, onDelete, onUpdate, onStateChange, onStateChangenote }) => {
     const [childState, setChildState] = useState(false);
+    const [childStatenote, setChildStatenote] = useState(false);
     const [currentTime, setCurrentTime] = useState('');
     const fetchCurrentTime = () => {
         axios.get(apiUrl)
@@ -43,6 +50,11 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onToggle, onDelete, onUpdate
         const newState = !childState;
         setChildState(newState);
         onStateChange(newState);
+    };
+    const toggleStatenote = () => {
+        const newState = !childState;
+        setChildStatenote(newState);
+        onStateChangenote(newState);
     };
     
     return (
@@ -91,21 +103,21 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onToggle, onDelete, onUpdate
                         </div>
                 </div>
                 <div className='my-2%  p-0.5 bg-azul-crepusculo'>
-                    <div className='border p-2 border-beige-perlado '>
-                        <h1 className='text-center tracking-widest text-3xl font-bold text-beige-perlado '> NOTES </h1>
+                    <div className='border p-2 border-beige-perlado flex justify-around items-center '>
+                        <h1 className='text-center tracking-widest text-3xl font-bold text-beige-perlado w-3/4 '> NOTES </h1>
+                        <AiOutlinePlusCircle className="text-3xl hover:cursor-pointer text-beige-perlado"
+                        onClick={toggleStatenote}/>
                     </div>
                 </div>
                 <div className='p-2 border-2 mb-2% border-negro-medianoche h-39vh overflow-y-auto '>
-                {tasks.map((task) => (
-                    <Task
-                        key={task.id}
-                        task={task}
-                        onToggle={() => onToggle(task.id)}
-                        onDelete={() => onDelete(task.id)}
-                        onUpdate={(newText) => onUpdate(task.id, newText)} 
+                {notes.map((note) => (
+                    <Note
+                    key={note.id}
+                    note={note}
+                    onUpdatenote={(newText) => onUpdatenote(note.id, newText)}
+                    onDeletenote={() => onDeletenote(note.id)}
                     />
                 ))}
-
                 </div>
                 <h1 className='text-negro-medianoche text-6xl font-bold text-center'>旅程、今日で終わり</h1>
                 <div className='flex justify-between items-center mt-1'>

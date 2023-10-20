@@ -1,10 +1,47 @@
 {
   "tasks": [
     {
-      "text": "Pasear a mis perros durante tres horas exactas",
+      "text": "Ir de compras",
       "completed": false,
-      "id": 3
+      "id": 5
     },
+    {
+      "text": "asdas",
+      "completed": false,
+      "id": 6
+    },
+    {
+      "text": "tarea extra",
+      "completed": false,
+      "id": 7
+    },
+    {
+      "text": "mas tareas extras",
+      "completed": false,
+      "id": 8
+    },
+    {
+      "text": "Nueva tarea",
+      "completed": false,
+      "id": 9
+    },
+    {
+      "text": "Otra tarea",
+      "completed": false,
+      "id": 10
+    },
+    {
+      "text": "sds",
+      "completed": false,
+      "id": 11
+    },
+    {
+      "text": "nueva nota",
+      "completed": false,
+      "id": 12
+    }
+  ],
+  "Notes": [
     {
       "text": "Pasear aun mas al perrico",
       "completed": false,
