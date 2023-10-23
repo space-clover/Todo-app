@@ -15,11 +15,27 @@ const Home: React.FC = () => {
   const [newTaskTextnote, setNewTaskTextnote] = useState<string>('');
   const [parentState, setParentState] = useState(false);
   const [parentStatenote, setParentStatenote] = useState(false);
-  const [importantlist, setImportantlist] = useState(true);
-  const togglerelevant = () => {
-    setImportantlist(!importantlist);
-    fetchTasks();
-  };
+  const [importantlist, setImportantlist] = useState(false);
+  const [uncompleted, setuncompleted] = useState(false);
+
+const togglerelevant = () => {
+  setImportantlist(!importantlist);
+
+  if (importantlist) {
+    fetchTasks()
+  } else {
+    fetchTasks()
+  }
+};
+const uncompletedstate = () => {
+  setuncompleted(!uncompleted);
+
+  if (uncompleted) {
+    fetchTasks()
+  } else {
+    fetchTasks()
+  }
+};
   const handleChildStateChange = (newChildState: boolean) => {
     setParentState(newChildState);
   };
@@ -44,14 +60,24 @@ const Home: React.FC = () => {
       const response = await axios.get('http://localhost:5000/tasks');
       const allTasks = response.data;
       const completeTasks = allTasks.filter(task => task.completed);
-      if (importantlist == true){
+      const uncompletedTasks = allTasks.filter(task => !task.completed);
+      if (importantlist && uncompleted) {
         setTasks(allTasks);
+        console.log("estado 1", uncompleted, importantlist);
+      } else if (!importantlist && !uncompleted) {
+        setTasks(allTasks);
+        console.log("estado 2", uncompleted, importantlist);
+      } else if (importantlist && !uncompleted) {
+        setTasks(completeTasks);
+        console.log("estado 3", uncompleted, importantlist);
+      } else if (uncompleted && !importantlist) {
+        setTasks(uncompletedTasks);
+        console.log("estado 4", uncompleted, importantlist);
       }
-      else{
-        setTasks(completeTasks)
-      }
+      
     } catch (error) {
-      console.error('Error al obtener las tareas:', error);
+      console.error(
+        'Error al obtener las tareas:', error);
     }
   };
   
@@ -66,9 +92,8 @@ const Home: React.FC = () => {
     if (taskToUpdate) {
       taskToUpdate.text = newText;
       await axios.put(`http://localhost:5000/tasks/${taskId}`, taskToUpdate);
-      
       fetchTasks();
-     
+      console.log(importantlist)
     }
   };
   const toggleTask = async (taskId: number) => {
@@ -77,6 +102,7 @@ const Home: React.FC = () => {
       taskToUpdate.completed = !taskToUpdate.completed;
       await axios.put(`http://localhost:5000/tasks/${taskId}`, taskToUpdate);
       fetchTasks();
+     
     }
   };
 
@@ -84,10 +110,10 @@ const Home: React.FC = () => {
     if (newTaskText.trim() === '') {
       return;
     }
-    console.log("Valor de importantlist:", importantlist);
     const newTask = {
       text: newTaskText,
       completed: false,
+      important: false,
     };
     await axios.post('http://localhost:5000/tasks', newTask);
     setNewTaskText('');
@@ -113,14 +139,16 @@ const Home: React.FC = () => {
   const deleteTask = async (taskId: number) => {
     await axios.delete(`http://localhost:5000/tasks/${taskId}`);
     fetchTasks();
+    console.log(importantlist)
   };
 
   useEffect(() => {
     fetchTasks();
     fetchNotes();
-    togglerelevant();
-  }, []);
-
+    uncompletedstate;
+    togglerelevant;
+  }, [importantlist, uncompleted]);
+  
   return (
     <div className=" bg-beige-perlado h-screen w-full flex items-center justify-center px-3 ">
 
@@ -175,7 +203,7 @@ const Home: React.FC = () => {
               </div>
             </div>
           </div> }
-          <TaskList notes={notes} onstateimportant={togglerelevant} tasks={tasks} onDeletenote={onDeletenote} onUpdatenote={onUpdatenote} onToggle={toggleTask} onDelete={deleteTask} onUpdate={updateTask} onStateChange={handleChildStateChange} onStateChangenote={handleChildStateChangenote} />
+          <TaskList notes={notes} uncompletedstate={uncompletedstate} onstateimportant={togglerelevant} tasks={tasks} onDeletenote={onDeletenote} onUpdatenote={onUpdatenote} onToggle={toggleTask} onDelete={deleteTask} onUpdate={updateTask} onStateChange={handleChildStateChange} onStateChangenote={handleChildStateChangenote} />
         </div>
       </div>
     </div>
