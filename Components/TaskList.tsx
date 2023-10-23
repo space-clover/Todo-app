@@ -17,14 +17,16 @@ interface TaskListProps {
     onUpdatenote: (id: number, newText: string) => void;
     onStateChange: (newState: boolean) => void;
     onStateChangenote: (newState: boolean) => void;
+    onstateimportant: (newState: boolean) => void;
 }
 
 const apiUrl = 'http://worldtimeapi.org/api/ip';
 
 
-const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdatenote ,onToggle, onDelete, onUpdate, onStateChange, onStateChangenote }) => {
+const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdatenote ,onToggle, onDelete, onUpdate, onStateChange, onStateChangenote, onstateimportant }) => {
     const [childState, setChildState] = useState(false);
     const [childStatenote, setChildStatenote] = useState(false);
+    const [importants, setimportants] = useState(false);
     const [currentTime, setCurrentTime] = useState('');
     const fetchCurrentTime = () => {
         axios.get(apiUrl)
@@ -52,9 +54,14 @@ const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdat
         onStateChange(newState);
     };
     const toggleStatenote = () => {
-        const newState = !childState;
+        const newState = !childStatenote;
         setChildStatenote(newState);
         onStateChangenote(newState);
+    };
+    const important = () => {
+        const newState = !importants;
+        setimportants(newState);
+        onstateimportant(newState);
     };
     
     return (
@@ -92,15 +99,16 @@ const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdat
                     </div>
                 </div>
                 <div className=' w-full flex justify-between '>
-                        <div className= ' w-32%  border-2 px-2 py-3 border-negro-medianoche'>
-                            <h1 className='text-center tracking-wider text-lg font-bold text-negro '> IMPORTANT</h1>
-                        </div>
-                        <div className=' w-32% border-2 px-2 py-3 border-negro-medianoche'>
+                        <button className= ' w-32%  border-2 px-2 py-3 border-negro-medianoche cursor-pointer' onClick={important}>
+                            <h1 className='text-center tracking-wider text-lg font-bold text-negro '
+                            > IMPORTANT</h1>
+                        </button >
+                        <button className=' w-32% border-2 px-2 py-3 border-negro-medianoche'>
                             <h1 className='text-center tracking-wider text-lg font-bold text-negro '> COMPLETED</h1>
-                        </div>
-                        <div className=' w-32% border-2 px-2 py-3 border-negro-medianoche'>
+                        </button>
+                        <button className=' w-32% border-2 px-2 py-3 border-negro-medianoche'>
                             <h1 className='text-center tracking-wider text-lg font-bold text-negro '>UNCOMPLETED</h1>
-                        </div>
+                        </button>
                 </div>
                 <div className='my-2%  p-0.5 bg-azul-crepusculo'>
                     <div className='border p-2 border-beige-perlado flex justify-around items-center '>
