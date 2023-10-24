@@ -35,6 +35,12 @@
       "completed": false,
       "important": true,
       "id": 22
+    },
+    {
+      "text": "Nueva nota importante de prueba",
+      "completed": true,
+      "important": true,
+      "id": 23
     }
   ],
   "Notes": [
@@ -76,6 +82,11 @@
       "text": "nueva nota",
       "completed": false,
       "id": 12
+    },
+    {
+      "text": "sdasdas",
+      "completed": false,
+      "id": 13
     }
   ]
 }

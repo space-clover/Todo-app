@@ -100,7 +100,7 @@ const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdat
                 <div className='my-1%  p-0.5 bg-azul-crepusculo'>
                     <div className='border p-2 border-beige-perlado flex justify-around items-center '>
                         <h1 className='text-center tracking-widest text-3xl font-bold '> TASK TO DO </h1>
-                        <AiOutlinePlusCircle className="text-3xl hover:cursor-pointer text-beige-perlado"
+                        <AiOutlinePlusCircle className="text-3xl hover:cursor-pointer hover:text-negro-medianoche hover:bg-beige-perlado rounded-full transition duration-300 text-beige-perlado"
                         onClick={toggleState}/>
                     </div>
                 </div>
@@ -150,7 +150,7 @@ const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdat
                 <div className='my-2%  p-0.5 bg-azul-crepusculo'>
                     <div className='border p-2 border-beige-perlado flex justify-around items-center '>
                         <h1 className='text-center tracking-widest text-3xl font-bold text-beige-perlado w-3/4 '> NOTES </h1>
-                        <AiOutlinePlusCircle className="text-3xl hover:cursor-pointer text-beige-perlado"
+                        <AiOutlinePlusCircle className="text-3xl hover:cursor-pointer text-beige-perlado hover:text-negro-medianoche hover:bg-beige-perlado rounded-full transition duration-300"
                         onClick={toggleStatenote}/>
                     </div>
                 </div>

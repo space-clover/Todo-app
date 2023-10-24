@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react';
 import { TaskType } from "./Types/TaskType";
-import { AiFillEdit, AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { AiFillEdit, AiFillStar, AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 interface TaskProps {
     task: TaskType;
     onToggle: () => void;
@@ -18,9 +18,11 @@ interface TaskProps {
       setEditing(false);
     };
   
-    return (
-      <div className="flex items-center p-0.5  w-full bg-negro-medianoche text-beige-perlado mt-1% ">
+    return (  
+      <div className="flex items-center p-0.5 z-10  relative w-full bg-negro-medianoche text-beige-perlado mt-1% ">
+          <AiFillStar className={`absolute top-1 right-1 text-xl   ${task.important ? 'text-yellow-600' : 'text-negro-medianoche'}`}/>
         <div className='border-beige-perlado flex items-center justify-around text-xl  border-2 w-full py-4 px-3'>
+      
           <input
             type="checkbox"
             checked={task.completed}

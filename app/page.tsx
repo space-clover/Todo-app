@@ -5,7 +5,7 @@ import TaskList from '../Components/TaskList';
 import { TaskType } from '../Components/Types/TaskType';
 import { NoteType } from '@/Components/Types/NoteType';
 import { GiHummingbird, GiNestBirds  } from 'react-icons/gi';
-import { AiFillCloseSquare, AiFillPlusCircle, AiOutlineSlackSquare } from "react-icons/ai";
+import { AiFillCloseCircle, AiFillCloseSquare, AiFillPlusCircle, AiOutlineSlackSquare } from "react-icons/ai";
 
 
 const Home: React.FC = () => {
@@ -19,11 +19,23 @@ const Home: React.FC = () => {
   const [uncompleted, setuncompleted] = useState(false);
   const [isTaskImportant, setIsTaskImportant] = useState(false);
   const [isTaskRelevant, setIsTaskrelevant] = useState(false);
+  const [isAddTaskFormOpen, setIsAddTaskFormOpen] = useState(false);
+  const [isAddNoteFormOpen, setIsAddNoteFormOpen] = useState(false);
+
 
 const relevant = () => {
   setIsTaskrelevant(!isTaskRelevant);
   console.log(isTaskRelevant)
 }
+const toggleAddTaskForm = () => {
+  setIsAddTaskFormOpen(!isAddTaskFormOpen);
+  setParentState(!parentState);
+};
+const toggleAddNoteForm = () => {
+  setIsAddNoteFormOpen(!isAddNoteFormOpen);
+  setParentStatenote(!parentStatenote);
+};
+
 const togglerelevant = () => {
   setImportantlist(!importantlist);
 
@@ -43,10 +55,10 @@ const uncompletedstate = () => {
   }
 };
   const handleChildStateChange = (newChildState: boolean) => {
-    setParentState(newChildState);
+    setParentState(true);
   };
   const handleChildStateChangenote = (newChildStatenote: boolean) => {
-    setParentStatenote(newChildStatenote);
+    setParentStatenote(true);
   };
   const onUpdatenote = async (noteId: number, newText: string) => {
     const noteToUpdate = notes.find((note) => note.id === noteId);
@@ -73,10 +85,11 @@ const uncompletedstate = () => {
       const uncompletedAndImportantTasks = uncompletedTasks.filter(task => task.important);
 
 
+
       if (importantlist && uncompleted && isTaskRelevant) {
         setTasks(importantTasks);
       } else if (importantlist && uncompleted && !isTaskRelevant) {
-        setTasks(unimportantTasks);
+        setTasks(allTasks);
       } else if (importantlist && !uncompleted && isTaskRelevant) {
         setTasks(completeAndImportantTasks);
       } else if (importantlist && !uncompleted && !isTaskRelevant) {
@@ -179,7 +192,9 @@ const uncompletedstate = () => {
           <div className='absolute top-1% right-3% py-4 px-4 rounded-full border-4 flex flex-col border-negro-medianoche'>
           <GiNestBirds className="text-azul-nocturno text-5xl "/>
           </div>
-          { parentState && <div className=" w-1/2 absolute top-1/3 left-1/4 bg-beige-perlado   mb-4 ">
+          { parentState && <div className=" w-1/2 absolute top-25% left-15% bg-beige-perlado z-20   mb-4 ">
+            <AiFillCloseCircle className="text-black text-2xl absolute top-2 right-2 cursor-pointer hover:text-red-800 transition duration-300 "
+            onClick={toggleAddTaskForm}/>
             <div className='border-4 border-negro-medianoche p-0.5'>
               <div className='border border-negro-medianoche  space-x-2 p-2 '>
                 <div className='flex justify-around'>
@@ -193,23 +208,26 @@ const uncompletedstate = () => {
                     value={newTaskText}
                     onChange={(e) => setNewTaskText(e.target.value)}
                   />
-                  <label>
+                  <AiFillPlusCircle
+                    className=" mx-2% text-azul-nocturno hover:text-negro-medianoche transition duration-300 text-5xl hover:cursor-pointer  rounded"
+                    onClick={addTask}
+                  />
+                </div>
+                <label className='flex items-center text-azul-profundo font-bold py-2 w-20%'>
                     <input
                       type="checkbox"
+                      className='mr-2 w-auto'
                       checked={isTaskImportant}
                       onChange={() => setIsTaskImportant(!isTaskImportant)}
                     />
                     Importante
                   </label>
-                  <AiFillPlusCircle
-                    className=" mx-2% text-azul-nocturno text-5xl hover:cursor-pointer  rounded"
-                    onClick={addTask}
-                  />
-                </div>
               </div>
             </div>
           </div> }
-          { parentStatenote && <div className=" w-1/2 absolute top-1/3 left-1/4 bg-beige-perlado   mb-4 ">
+          { parentStatenote && <div className=" w-1/2 absolute top-50% right-15% bg-beige-perlado z-20   mb-4 ">
+          <AiFillCloseCircle className="text-black text-2xl absolute top-2 right-2 cursor-pointer hover:text-red-800 transition duration-300 "
+            onClick={toggleAddNoteForm}/>
             <div className='border-4 border-negro-medianoche p-0.5'>
               <div className='border border-negro-medianoche  space-x-2 p-2 '>
                 <div className='flex justify-around'>
