@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { all } from 'axios';
 import TaskList from '../Components/TaskList';
 import { TaskType } from '../Components/Types/TaskType';
 import { NoteType } from '@/Components/Types/NoteType';
@@ -17,7 +17,13 @@ const Home: React.FC = () => {
   const [parentStatenote, setParentStatenote] = useState(false);
   const [importantlist, setImportantlist] = useState(false);
   const [uncompleted, setuncompleted] = useState(false);
+  const [isTaskImportant, setIsTaskImportant] = useState(false);
+  const [isTaskRelevant, setIsTaskrelevant] = useState(false);
 
+const relevant = () => {
+  setIsTaskrelevant(!isTaskRelevant);
+  console.log(isTaskRelevant)
+}
 const togglerelevant = () => {
   setImportantlist(!importantlist);
 
@@ -60,19 +66,29 @@ const uncompletedstate = () => {
       const response = await axios.get('http://localhost:5000/tasks');
       const allTasks = response.data;
       const completeTasks = allTasks.filter(task => task.completed);
+      const importantTasks = allTasks.filter(task => task.important)
+      const unimportantTasks = allTasks.filter(task => !task.important);
       const uncompletedTasks = allTasks.filter(task => !task.completed);
-      if (importantlist && uncompleted) {
-        setTasks(allTasks);
-        console.log("estado 1", uncompleted, importantlist);
-      } else if (!importantlist && !uncompleted) {
-        setTasks(allTasks);
-        console.log("estado 2", uncompleted, importantlist);
-      } else if (importantlist && !uncompleted) {
+      const completeAndImportantTasks = completeTasks.filter(task => task.important);
+      const uncompletedAndImportantTasks = uncompletedTasks.filter(task => task.important);
+
+
+      if (importantlist && uncompleted && isTaskRelevant) {
+        setTasks(importantTasks);
+      } else if (importantlist && uncompleted && !isTaskRelevant) {
+        setTasks(unimportantTasks);
+      } else if (importantlist && !uncompleted && isTaskRelevant) {
+        setTasks(completeAndImportantTasks);
+      } else if (importantlist && !uncompleted && !isTaskRelevant) {
         setTasks(completeTasks);
-        console.log("estado 3", uncompleted, importantlist);
-      } else if (uncompleted && !importantlist) {
+      } else if (!importantlist && uncompleted && isTaskRelevant) {
+        setTasks(uncompletedAndImportantTasks);
+      } else if (!importantlist && uncompleted && !isTaskRelevant) {;
         setTasks(uncompletedTasks);
-        console.log("estado 4", uncompleted, importantlist);
+      } else if (!importantlist && !uncompleted && isTaskRelevant) {
+        setTasks(importantTasks);
+      } else {
+        setTasks(allTasks);
       }
       
     } catch (error) {
@@ -110,13 +126,16 @@ const uncompletedstate = () => {
     if (newTaskText.trim() === '') {
       return;
     }
+  
     const newTask = {
       text: newTaskText,
       completed: false,
-      important: false,
+      important: isTaskImportant, // Aquí establecemos el valor de importante según el estado del checkbox
     };
+  
     await axios.post('http://localhost:5000/tasks', newTask);
     setNewTaskText('');
+    setIsTaskImportant(false); // Reiniciamos el estado del checkbox
     fetchTasks();
   };
   const addNote = async () => {
@@ -147,7 +166,8 @@ const uncompletedstate = () => {
     fetchNotes();
     uncompletedstate;
     togglerelevant;
-  }, [importantlist, uncompleted]);
+    setIsTaskrelevant
+  }, [importantlist, uncompleted,isTaskRelevant]);
   
   return (
     <div className=" bg-beige-perlado h-screen w-full flex items-center justify-center px-3 ">
@@ -173,6 +193,14 @@ const uncompletedstate = () => {
                     value={newTaskText}
                     onChange={(e) => setNewTaskText(e.target.value)}
                   />
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={isTaskImportant}
+                      onChange={() => setIsTaskImportant(!isTaskImportant)}
+                    />
+                    Importante
+                  </label>
                   <AiFillPlusCircle
                     className=" mx-2% text-azul-nocturno text-5xl hover:cursor-pointer  rounded"
                     onClick={addTask}
@@ -203,7 +231,7 @@ const uncompletedstate = () => {
               </div>
             </div>
           </div> }
-          <TaskList notes={notes} uncompletedstate={uncompletedstate} onstateimportant={togglerelevant} tasks={tasks} onDeletenote={onDeletenote} onUpdatenote={onUpdatenote} onToggle={toggleTask} onDelete={deleteTask} onUpdate={updateTask} onStateChange={handleChildStateChange} onStateChangenote={handleChildStateChangenote} />
+          <TaskList notes={notes} Onrelevantstate={relevant} uncompletedstate={uncompletedstate} onstateimportant={togglerelevant} tasks={tasks} onDeletenote={onDeletenote} onUpdatenote={onUpdatenote} onToggle={toggleTask} onDelete={deleteTask} onUpdate={updateTask} onStateChange={handleChildStateChange} onStateChangenote={handleChildStateChangenote} />
         </div>
       </div>
     </div>

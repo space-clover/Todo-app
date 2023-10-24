@@ -28,8 +28,13 @@
     {
       "text": "Comprobando si funciona important feature",
       "completed": false,
-      "important": false,
       "id": 21
+    },
+    {
+      "text": "Comprobando funcionamiento de nueva tarea",
+      "completed": false,
+      "important": true,
+      "id": 22
     }
   ],
   "Notes": [

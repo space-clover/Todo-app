@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Task from './Task';
 import axios from 'axios';
 import Note from './Note';
+import { motion } from "framer-motion"
 import { AiOutlinePlus, AiOutlinePlusCircle } from 'react-icons/ai';
 
 interface TaskListProps {
@@ -19,17 +20,20 @@ interface TaskListProps {
     onStateChangenote: (newState: boolean) => void;
     onstateimportant: (newState: boolean) => void;
     uncompletedstate: (newState: boolean) => void;
+    Onrelevantstate: (newState: boolean) => void;
 }
 
 const apiUrl = 'http://worldtimeapi.org/api/ip';
 
 
-const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdatenote ,onToggle, onDelete, onUpdate, onStateChange, onStateChangenote, onstateimportant, uncompletedstate }) => {
+const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdatenote ,onToggle, onDelete, onUpdate, onStateChange, onStateChangenote, onstateimportant, uncompletedstate, Onrelevantstate }) => {
     const [childState, setChildState] = useState(false);
     const [childStatenote, setChildStatenote] = useState(false);
     const [importants, setimportants] = useState(false);
     const [complet, setcomplet] = useState(false);
     const [currentTime, setCurrentTime] = useState('');
+    const [isImportant, setIsImportant] = useState(false);
+    const [Relevantstate, setRelevant] = useState(false);
     const fetchCurrentTime = () => {
         axios.get(apiUrl)
             .then((response) => {
@@ -63,6 +67,7 @@ const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdat
     const important = () => {
         const newState = !importants;
         setimportants(newState);
+        setIsImportant(!isImportant);
         onstateimportant(newState);
     };
     const Uncompleted = () => {
@@ -70,7 +75,24 @@ const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdat
         setcomplet(newState);
         uncompletedstate(newState);
     };
+    const Relevant = () => {
+        const newState = !Relevantstate;
+        setRelevant(newState);
+        Onrelevantstate(newState);
+    };
     
+    const lineanimation = {
+        initial: { width: "0px" },
+        animate: { width: isImportant ? "100%" : "0px", transition: { duration: 0.6 } },  
+    };
+    const lineanimationuncompleted = {
+        initial: { width: "0px" },
+        animate: { width: complet ? "100%" : "0px", transition: { duration: 0.6 } },  
+    };
+    const lineanimationrelevant = {
+        initial: { width: "0px" },
+        animate: { width: Relevantstate ? "100%" : "0px", transition: { duration: 0.6 } },  
+    };
     return (
         
         <section className='flex w-full justify-around px-1%'>
@@ -106,16 +128,23 @@ const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdat
                     </div>
                 </div>
                 <div className=' w-full flex justify-between '>
-                        <button className= ' w-32%  border-2 px-2 py-3 border-negro-medianoche cursor-pointer' onClick={important}>
-                            <h1 className='text-center tracking-wider text-lg font-bold text-negro '
-                            > COMPLETED</h1>
-                        </button >
-                        <button className=' w-32% border-2 px-2 py-3 border-negro-medianoche'>
-                            <h1 className='text-center tracking-wider text-lg font-bold text-negro '
-                            onClick={Uncompleted}> UNCOMPLETED</h1>
+                <button
+                    className=" hover:text-azul-profundo text-negro  transition duration-200 w-32% border-2 px-2  flex flex-col relative  border-negro-medianoche cursor-pointer"
+                    onClick={important}>
+                    <motion.p className='border-y-2 border-azul-profundo absolute top-0 left-0 w-full  '
+                    {...lineanimation}/>
+                    <h1 className="text-center py-3 tracking-wider text-lg w-full font-bold ">COMPLETED</h1>
+                </button>
+                        <button className=' hover:text-azul-profundo text-negro  transition duration-200 w-32% border-2 relative px-2 py-3 border-negro-medianoche'
+                        onClick={Uncompleted}>
+                            <motion.p className='border-y-2 border-azul-profundo absolute top-0 left-0 w-full  '
+                            {...lineanimationuncompleted}/>
+                            <h1 className='text-center tracking-wider w-full text-lg font-bold '> UNCOMPLETED</h1>
                         </button>
-                        <button className=' w-32% border-2 px-2 py-3 border-negro-medianoche'>
-                            <h1 className='text-center tracking-wider text-lg font-bold text-negro '>IMPORTANT</h1>
+                        <button className=' hover:text-azul-profundo text-negro  transition duration-200 w-32% border-2 px-2 py-3 border-negro-medianoche relative' onClick={Relevant}>
+                        <motion.p className='border-y-2 border-azul-profundo absolute top-0 left-0 w-full  '
+                            {...lineanimationrelevant}/>
+                            <h1 className='text-center tracking-wider text-lg font-bold  '>IMPORTANT</h1>
                         </button>
                 </div>
                 <div className='my-2%  p-0.5 bg-azul-crepusculo'>
