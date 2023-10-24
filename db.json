@@ -21,11 +21,6 @@
       "id": 19
     },
     {
-      "text": "Nueva tarea",
-      "completed": false,
-      "id": 20
-    },
-    {
       "text": "Comprobando si funciona important feature",
       "completed": false,
       "id": 21
@@ -41,6 +36,12 @@
       "completed": true,
       "important": true,
       "id": 23
+    },
+    {
+      "text": "Nueva tarea importanta test",
+      "completed": true,
+      "important": true,
+      "id": 24
     }
   ],
   "Notes": [

@@ -143,12 +143,12 @@ const uncompletedstate = () => {
     const newTask = {
       text: newTaskText,
       completed: false,
-      important: isTaskImportant, // Aquí establecemos el valor de importante según el estado del checkbox
+      important: isTaskImportant, 
     };
   
     await axios.post('http://localhost:5000/tasks', newTask);
     setNewTaskText('');
-    setIsTaskImportant(false); // Reiniciamos el estado del checkbox
+    setIsTaskImportant(false); 
     fetchTasks();
   };
   const addNote = async () => {
@@ -161,8 +161,8 @@ const uncompletedstate = () => {
       completed: false,
     };
   
-    await axios.post('http://localhost:5000/Notes', newNote); // Aquí debería ser '/notes' en lugar de '/tasks'
-    setNewTaskTextnote(''); // Debes utilizar setNewNoteText para limpiar el campo de entrada
+    await axios.post('http://localhost:5000/Notes', newNote); 
+    setNewTaskTextnote(''); 
     fetchNotes();
   };
   

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { NoteType } from "./Types/NoteType"; // Asegúrate de importar el tipo de datos adecuado
+import { NoteType } from "./Types/NoteType"; 
 import { AiOutlineEdit, AiOutlineCheck, AiOutlineDelete } from "react-icons/ai";
 
 interface NoteProps {
-  note: NoteType; // Asegúrate de que el tipo sea el correcto
+  note: NoteType; 
   onUpdatenote: (text: string) => void;
   onDeletenote: () => void;
 }
