@@ -12,7 +12,7 @@ Toritetsu List is a task management application that allows users to efficiently
 - Toggle the task and note creation forms.
 - Filter tasks based on importance and completion status.
 - Responsive design for various screen sizes.
-
+ ![Captura de Pantalla 1](https://github.com/space-clover/Todo-app/assets/133059097/c7e362b3-dc45-4b19-8abd-aa9d2cc1306a)
 ## Installation
 1. Clone this repository to your local machine.
 2. Navigate to the project directory in your terminal.
