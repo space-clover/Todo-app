@@ -14,7 +14,7 @@ Toritetsu List is a task and note list application developed in React. With this
 - **User-Friendly Interface**: The user interface is simple and easy to use, allowing you to manage your tasks and notes effectively.
 
 ## Screenshots
-[Todo app](https://github.com/space-clover/Todo-app/assets/133059097/c7e362b3-dc45-4b19-8abd-aa9d2cc1306a)
+![Captura de Pantalla 1](https://github.com/space-clover/Todo-app/assets/133059097/c7e362b3-dc45-4b19-8abd-aa9d2cc1306a)
 ## Usage Instructions
 
 1. **Add a New Task**: Click the "plus" icon to open the new task form. Enter the task text and check the "Important" box if necessary. Then, click the "plus" icon to add the task.
