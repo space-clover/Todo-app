@@ -55,12 +55,7 @@ markdown
 - Icons: React Icons
 
 ## Author
-- [Your Name]
+- Jonathan mejia
 
-## License
-This project is licensed under the [License Name] License - see the [LICENSE.md](LICENSE.md) file for details.
-
-## Acknowledgments
-- [Any acknowledgments or credits you want to include]
 
 Feel free to customize this README with your specific project detail
