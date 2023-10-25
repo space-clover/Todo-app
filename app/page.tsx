@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react';
 import axios, { all } from 'axios';
 import TaskList from '../Components/TaskList';
 import { TaskType } from '../Components/Types/TaskType';
-import { NoteType } from '@/Components/Types/NoteType';
+import { NoteType } from "../Components/Types/NoteType";
 import { GiHummingbird, GiNestBirds  } from 'react-icons/gi';
 import { AiFillCloseCircle, AiFillCloseSquare, AiFillPlusCircle, AiOutlineSlackSquare } from "react-icons/ai";
+import Task from '@/Components/Task';
 
 
 const Home: React.FC = () => {
@@ -76,16 +77,12 @@ const uncompletedstate = () => {
   const fetchTasks = async () => {
     try {
       const response = await axios.get('https://back-todoapp.onrender.com/tasks');
-      const allTasks = response.data;
-      const completeTasks = allTasks.filter(task => task.completed);
-      const importantTasks = allTasks.filter(task => task.important)
-      const unimportantTasks = allTasks.filter(task => !task.important);
-      const uncompletedTasks = allTasks.filter(task => !task.completed);
-      const completeAndImportantTasks = completeTasks.filter(task => task.important);
-      const uncompletedAndImportantTasks = uncompletedTasks.filter(task => task.important);
-
-
-
+      const allTasks: TaskType[] = response.data; // Asegura que allTasks es un array de TaskType
+      const completeTasks = allTasks.filter((task: TaskType) => task.completed);
+      const importantTasks = allTasks.filter((task: TaskType) => task.important);
+      const uncompletedTasks = allTasks.filter((task: TaskType) => !task.completed);
+      const completeAndImportantTasks = completeTasks.filter((task: TaskType) => task.important);
+      const uncompletedAndImportantTasks = uncompletedTasks.filter((task: TaskType) => task.important);
       if (importantlist && uncompleted && isTaskRelevant) {
         setTasks(importantTasks);
       } else if (importantlist && uncompleted && !isTaskRelevant) {
