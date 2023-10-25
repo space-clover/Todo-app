@@ -64,18 +64,18 @@ const uncompletedstate = () => {
     const noteToUpdate = notes.find((note) => note.id === noteId);
     if (noteToUpdate) {
       noteToUpdate.text = newText;
-      await axios.put(`http://localhost:5000/notes/${noteId}`, noteToUpdate);
+      await axios.put(`https://back-todoapp.onrender.com/Notes/${noteId}`, noteToUpdate);
       fetchNotes();
     };
   }
 
   const onDeletenote = async (noteId: number) => {
-    await axios.delete(`http://localhost:5000/notes/${noteId}`);
+    await axios.delete(`https://back-todoapp.onrender.com/Notes/${noteId}`);
     fetchNotes();
   };
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/tasks');
+      const response = await axios.get('https://back-todoapp.onrender.com/tasks');
       const allTasks = response.data;
       const completeTasks = allTasks.filter(task => task.completed);
       const importantTasks = allTasks.filter(task => task.important)
@@ -112,7 +112,7 @@ const uncompletedstate = () => {
   
  
   const fetchNotes = async () => {
-    const response = await axios.get('http://localhost:5000/Notes');
+    const response = await axios.get('https://back-todoapp.onrender.com/Notes');
     setNotes(response.data);
   };
   const updateTask = async (taskId: number, newText: string) => {
@@ -120,7 +120,7 @@ const uncompletedstate = () => {
     const taskToUpdate = tasks.find((task) => task.id === taskId);
     if (taskToUpdate) {
       taskToUpdate.text = newText;
-      await axios.put(`http://localhost:5000/tasks/${taskId}`, taskToUpdate);
+      await axios.put(`https://back-todoapp.onrender.com/tasks/${taskId}`, taskToUpdate);
       fetchTasks();
       console.log(importantlist)
     }
@@ -129,7 +129,7 @@ const uncompletedstate = () => {
     const taskToUpdate = tasks.find((task) => task.id === taskId);
     if (taskToUpdate) {
       taskToUpdate.completed = !taskToUpdate.completed;
-      await axios.put(`http://localhost:5000/tasks/${taskId}`, taskToUpdate);
+      await axios.put(`https://back-todoapp.onrender.com/tasks/${taskId}`, taskToUpdate);
       fetchTasks();
      
     }
@@ -146,7 +146,7 @@ const uncompletedstate = () => {
       important: isTaskImportant, 
     };
   
-    await axios.post('http://localhost:5000/tasks', newTask);
+    await axios.post('https://back-todoapp.onrender.com/tasks', newTask);
     setNewTaskText('');
     setIsTaskImportant(false); 
     fetchTasks();
@@ -161,7 +161,7 @@ const uncompletedstate = () => {
       completed: false,
     };
   
-    await axios.post('http://localhost:5000/Notes', newNote); 
+    await axios.post('https://back-todoapp.onrender.com/Notes', newNote); 
     setNewTaskTextnote(''); 
     fetchNotes();
   };
@@ -169,7 +169,7 @@ const uncompletedstate = () => {
   
 
   const deleteTask = async (taskId: number) => {
-    await axios.delete(`http://localhost:5000/tasks/${taskId}`);
+    await axios.delete(`https://back-todoapp.onrender.com/tasks/${taskId}`);
     fetchTasks();
     console.log(importantlist)
   };
