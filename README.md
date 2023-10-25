@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Toritetsu List App
 
-## Getting Started
+## Description
+Toritetsu List is a task management application that allows users to efficiently create, organize, and track their tasks and notes. It was developed using Next.js for the frontend, powered by Node.js on the backend, and styled with Tailwind CSS. The app is designed to help users improve productivity, effectively manage their time, and stay organized in their personal and professional life.
 
-First, run the development server:
+## Features
+- Create and manage tasks and notes.
+- Organize tasks into categories.
+- Set task priorities and due dates.
+- Mark tasks and notes as completed.
+- Add and update notes with dynamic text editing.
+- Toggle the task and note creation forms.
+- Filter tasks based on importance and completion status.
+- Responsive design for various screen sizes.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Installation
+1. Clone this repository to your local machine.
+2. Navigate to the project directory in your terminal.
+3. Install the required dependencies using npm:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+npm install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+javascript
+Copy code
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. To start the development server and activate the backend, you have two options:
 
-## Learn More
+- Using JSON-Server (for mocking a REST API):
 
-To learn more about Next.js, take a look at the following resources:
+  ```
+  npm run json-server
+  ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Using Node.js to run the server (if you have a custom backend):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  ```
+  node server.js
+  ```
 
-## Deploy on Vercel
+The application will be available at `http://localhost:3000`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. Use the application to create, manage, and organize your tasks and notes. You can also filter tasks based on importance and completion status.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+6. To build the application for production, use:
+
+npm run build
+
+markdown
+Copy code
+
+## Technologies Used
+- Frontend: Next.js, React
+- Backend: Node.js
+- Styling: Tailwind CSS
+- State Management: React Hooks
+- Data Fetching: Axios
+- Icons: React Icons
+
+## Author
+- Jonathan Mejia
+
+
+
+Feel free to customize this README with your specific project detail
