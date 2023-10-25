@@ -1,61 +1,61 @@
-# Toritetsu List App
+# Toritetsu List
 
 ## Description
-Toritetsu List is a task management application that allows users to efficiently create, organize, and track their tasks and notes. It was developed using Next.js for the frontend, powered by Node.js on the backend, and styled with Tailwind CSS. The app is designed to help users improve productivity, effectively manage their time, and stay organized in their personal and professional life.
+Toritetsu List is a task and note list application developed in React. With this application, you can efficiently organize your tasks and notes. You can mark your tasks as important, completed, or pending, and also add new notes to keep track of your ideas and reminders.
 
 ## Features
-- Create and manage tasks and notes.
-- Organize tasks into categories.
-- Set task priorities and due dates.
-- Mark tasks and notes as completed.
-- Add and update notes with dynamic text editing.
-- Toggle the task and note creation forms.
-- Filter tasks based on importance and completion status.
-- Responsive design for various screen sizes.
+
+- **Task Management**: You can create new tasks, mark them as important, completed, or pending, edit the text of tasks, and delete them.
+
+- **Note Management**: Add new notes, edit them, and delete them for quick note-taking and reminders.
+
+- **Task Filtering**: Filter your tasks by importance, completion status, and relevance.
+
+- **User-Friendly Interface**: The user interface is simple and easy to use, allowing you to manage your tasks and notes effectively.
+
+## Screenshots
+[Todo app](https://github.com/space-clover/Todo-app/assets/133059097/c7e362b3-dc45-4b19-8abd-aa9d2cc1306a)
+## Usage Instructions
+
+1. **Add a New Task**: Click the "plus" icon to open the new task form. Enter the task text and check the "Important" box if necessary. Then, click the "plus" icon to add the task.
+
+2. **Mark Tasks as Completed or Pending**: Click on a task to mark it as completed or pending.
+
+3. **Edit a Task**: Click on a task to edit its text.
+
+4. **Delete a Task**: Click the "close" icon on a task to delete it.
+
+5. **Add a New No!
+te**: Click the "plus" icon in the notes section to open the new note form. Enter the note text and click the "plus" icon to add the note.
+
+6. **Edit a Note**: Click on a note to edit its text.
+
+
+7. **Delete a Note**: Click the "close" icon on a note to delete it.
+
+
+8. **Filter Tasks**: Use the filtering buttons to display important tasks, pending tasks, and relevant tasks.
+
+9. **Task Relevance**: Click the "bird" icon to mark tasks as relevant.
+
+## Requirements
+- Modern web browser
 
 ## Installation
 1. Clone this repository to your local machine.
-2. Navigate to the project directory in your terminal.
-3. Install the required dependencies using npm:
+2. Open a terminal in the project's root folder.
+3. Run the following command to install dependencies:
 
-npm install
+   ```shell
+   npm install
+Once the installations are complete, run the application with the following command:
 
-javascript
-
-4. To start the development server and activate the backend, you have two options:
-
-- Using JSON-Server (for mocking a REST API):
-
-  ```
-  npm run json-server
-  ```
-
-- Using Node.js to run the server (if you have a custom backend):
-
-  ```
-  node server.js
-  ```
-
-The application will be available at `http://localhost:3000`.
-
-5. Use the application to create, manage, and organize your tasks and notes. You can also filter tasks based on importance and completion status.
-
-6. To build the application for production, use:
-
-npm run build
-
-markdown
+ ## shell
+Copy code
+npm start
+The application will open in your default web browser.
 
 ## Technologies Used
-- Frontend: Next.js, React
-- Backend: Node.js
-- Styling: Tailwind CSS
-- State Management: React Hooks
-- Data Fetching: Axios
-- Icons: React Icons
-
-## Author
-- Jonathan mejia
-
-
-Feel free to customize this README with your specific project detail
+React
+Axios
+Tailwind CSS
