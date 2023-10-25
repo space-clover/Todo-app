@@ -104,7 +104,7 @@ const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdat
                         onClick={toggleState}/>
                     </div>
                 </div>
-                <div className=' h-48vh overflow-y-auto border-2 border-black p-2'>
+                <div className=' h-48vh overflow-y-auto border-2 border-black p-2 scrollbar-thin  scrollbar-thumb-slate-400'>
                 {tasks.map((task) => (
                     <Task
                         key={task.id}
@@ -154,7 +154,7 @@ const TaskList: React.FC<TaskListProps> = ({ notes, tasks, onDeletenote, onUpdat
                         onClick={toggleStatenote}/>
                     </div>
                 </div>
-                <div className='p-2 border-2 mb-2% border-negro-medianoche h-39vh overflow-y-auto '>
+                <div className='p-2 border-2 mb-2% border-negro-medianoche h-39vh overflow-y-auto  scrollbar-thin  scrollbar-thumb-slate-400  '>
                 {notes.map((note) => (
                     <Note
                     key={note.id}

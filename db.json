@@ -1,11 +1,6 @@
 {
   "tasks": [
     {
-      "text": "nueva tera",
-      "completed": true,
-      "id": 13
-    },
-    {
       "text": "f",
       "completed": true,
       "id": 14
@@ -27,7 +22,7 @@
     },
     {
       "text": "Comprobando funcionamiento de nueva tarea",
-      "completed": false,
+      "completed": true,
       "important": true,
       "id": 22
     },
