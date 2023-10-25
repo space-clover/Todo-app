@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors'); // Importa el paquete 'cors'
+const cors = require('cors'); 
 
 const app = express();
 const port = 5000;
@@ -106,34 +106,30 @@ const data = {
   ]
 }
 function generateNewId() {
-  // Lógica para generar un ID único (por ejemplo, basado en el tiempo actual)
-  return Date.now(); // Este es solo un ejemplo, puedes utilizar una lógica más sofisticada.
+  return Date.now(); 
 }
 
 app.get('/tasks', (req, res) => {
   res.json(data.tasks);
 });
 app.post('/tasks', (req, res) => {
-  // Obtén los datos de la nueva tarea del cuerpo de la solicitud (req.body)
   const newTaskData = req.body;
   console.log("data de la nueva tarea" ,newTaskData)
+  const newTaskId = generateNewId();
 
-  // Genera un nuevo ID para la tarea (puedes usar alguna lógica para asignar un ID único)
-  const newTaskId = generateNewId(); // Implementa esta función para generar un ID único.
 
-  // Crea la nueva tarea con los datos proporcionados y el ID generado.
   const newTask = {
     id: newTaskId,
     text: newTaskData.text,
-    completed: newTaskData.completed || false, // Si no se proporciona, establece como false.
-    important: newTaskData.important || false, // Si no se proporciona, establece como false.
+    completed: newTaskData.completed || false, 
+    important: newTaskData.important || false, 
   };
   console.log("data de la nueva tarea compleja: ", newTask)
   // Agrega la nueva tarea a la lista de tareas en tus datos.
   data.tasks.push(newTask);
 
   // Responde con la tarea creada en formato JSON.
-  res.status(201).json(newTask); // El código 201 indica que se creó la tarea con éxito.
+  res.status(201).json(newTask); 
 });
 
 app.post('/Notes', (req, res) => {
@@ -189,9 +185,8 @@ app.delete('/tasks/:id', (req, res) => {
   if (taskIndex === -1) {
     res.status(404).json({ error: 'Tarea no encontrada' });
   } else {
-    // Elimina la tarea encontrada del array de tareas.
     data.tasks.splice(taskIndex, 1);
-    res.status(204).send(); // El código 204 indica que la tarea se eliminó con éxito y no hay contenido en la respuesta.
+    res.status(204).send();
   }
 });
 
@@ -215,9 +210,8 @@ app.delete('/Notes/:id', (req, res) => {
   if (noteIndex === -1) {
     res.status(404).json({ error: 'Nota no encontrada' });
   } else {
-    // Elimina la nota encontrada del array de notas.
     data.Notes.splice(noteIndex, 1);
-    res.status(204).send(); // El código 204 indica que la nota se eliminó con éxito y no hay contenido en la respuesta.
+    res.status(204).send();  
   }
 });
 app.put('/tasks/:id', (req, res) => {
@@ -227,10 +221,8 @@ app.put('/tasks/:id', (req, res) => {
   if (taskIndex === -1) {
     res.status(404).json({ error: 'Tarea no encontrada' });
   } else {
-    // Obtén los datos actualizados de la tarea del cuerpo de la solicitud (req.body).
-    const updatedTaskData = req.body;
 
-    // Actualiza la tarea existente con los nuevos datos.
+    const updatedTaskData = req.body;
     data.tasks[taskIndex] = {
       ...data.tasks[taskIndex],
       ...updatedTaskData,
@@ -242,5 +234,5 @@ app.put('/tasks/:id', (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`Servidor API en ejecución en http://localhost:${port}`);
+  console.log(`Servidor API en ejecución en ${port}`);
 });
