@@ -45,8 +45,6 @@ The application will be available at `http://localhost:3000`.
 
 npm run build
 
-markdown
-Copy code
 
 ## Technologies Used
 - Frontend: Next.js, React
